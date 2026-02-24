@@ -11,8 +11,8 @@
   justify-content: center;
   padding-top: 10vh;
   padding: 10vh var(--space-4) var(--space-4);
-  background: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(4px);
+  background: rgba(49,46,129,0.25);
+  backdrop-filter: blur(6px);
   opacity: 0;
   pointer-events: none;
   transition: opacity var(--transition-base);
@@ -171,11 +171,11 @@
 
 /* Highlight matched text */
 .search-highlight {
-  color: var(--accent-primary);
+  color: var(--accent-secondary);
   font-weight: 600;
-  background: rgba(88,166,255,0.1);
+  background: var(--accent-bg);
   border-radius: 2px;
-  padding: 0 1px;
+  padding: 0 2px;
 }
 
 /* Section separator */

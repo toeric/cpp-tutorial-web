@@ -1,54 +1,56 @@
 /* ============================================================
-   THEME — CSS Custom Properties (Dark IDE theme, fixed)
+   THEME — Light mode, soft indigo/lavender palette
    ============================================================ */
 
 :root {
-  /* Background layers */
-  --bg-base:        #0d1117;
-  --bg-surface:     #161b22;
-  --bg-elevated:    #21262d;
-  --bg-overlay:     #1c2128;
-  --bg-hover:       #262c35;
+  /* ── Backgrounds ── */
+  --bg-base:        #f7f8fc;
+  --bg-surface:     #ffffff;
+  --bg-elevated:    #eef0f8;
+  --bg-overlay:     #f0f2fa;
+  --bg-hover:       #e8eaf6;
 
-  /* Borders */
-  --border-subtle:  #21262d;
-  --border-default: #30363d;
-  --border-strong:  #484f58;
+  /* ── Borders ── */
+  --border-subtle:  #e8eaf4;
+  --border-default: #d4d8ee;
+  --border-strong:  #b8bdd8;
 
-  /* Text */
-  --text-primary:   #e6edf3;
-  --text-secondary: #8b949e;
-  --text-muted:     #6e7681;
-  --text-inverse:   #0d1117;
+  /* ── Text ── */
+  --text-primary:   #1a1d2e;
+  --text-secondary: #4a5070;
+  --text-muted:     #8890b0;
+  --text-inverse:   #ffffff;
 
-  /* Accent — electric blue */
-  --accent-primary:   #58a6ff;
-  --accent-secondary: #388bfd;
-  --accent-muted:     #1f6feb;
-  --accent-bg:        #0d2848;
+  /* ── Accent — indigo/violet ── */
+  --accent-primary:   #6366f1;
+  --accent-secondary: #4f46e5;
+  --accent-muted:     #818cf8;
+  --accent-bg:        #eef0fd;
+  --accent-light:     #f5f3ff;
 
-  /* Semantic colors */
-  --color-success:    #3fb950;
-  --color-success-bg: #0f2a14;
-  --color-success-border: #238636;
-  --color-danger:     #f85149;
-  --color-danger-bg:  #2d1117;
-  --color-danger-border: #8b2f2f;
-  --color-warning:    #e3b341;
-  --color-warning-bg: #272115;
-  --color-info:       #58a6ff;
+  /* ── Semantic ── */
+  --color-success:        #059669;
+  --color-success-bg:     #ecfdf5;
+  --color-success-border: #a7f3d0;
+  --color-danger:         #e11d48;
+  --color-danger-bg:      #fff1f2;
+  --color-danger-border:  #fda4af;
+  --color-warning:        #d97706;
+  --color-warning-bg:     #fffbeb;
+  --color-warning-border: #fcd34d;
+  --color-info:           #6366f1;
 
-  /* Progress / badge */
-  --color-complete:   #3fb950;
-  --color-in-progress:#e3b341;
-  --color-not-started:#484f58;
+  /* ── Progress / badge ── */
+  --color-complete:    #059669;
+  --color-in-progress: #d97706;
+  --color-not-started: #c4c8e0;
 
-  /* Code block */
-  --code-bg:        #0d1117;
-  --code-border:    #30363d;
-  --code-text:      #c9d1d9;
+  /* ── Code ── */
+  --code-bg:     #f8f9ff;
+  --code-border: #dde0f5;
+  --code-text:   #2d3158;
 
-  /* Typography */
+  /* ── Typography ── */
   --font-sans:  -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   --font-mono:  "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
   --font-size-xs:   0.75rem;
@@ -60,39 +62,33 @@
   --font-size-3xl:  1.875rem;
   --line-height:    1.7;
 
-  /* Spacing scale */
-  --space-1: 0.25rem;
-  --space-2: 0.5rem;
-  --space-3: 0.75rem;
-  --space-4: 1rem;
-  --space-5: 1.25rem;
-  --space-6: 1.5rem;
-  --space-8: 2rem;
-  --space-10: 2.5rem;
-  --space-12: 3rem;
+  /* ── Spacing ── */
+  --space-1: 0.25rem;  --space-2: 0.5rem;   --space-3: 0.75rem;
+  --space-4: 1rem;     --space-5: 1.25rem;  --space-6: 1.5rem;
+  --space-8: 2rem;     --space-10: 2.5rem;  --space-12: 3rem;
   --space-16: 4rem;
 
-  /* Radius */
-  --radius-sm:  4px;
-  --radius-md:  6px;
-  --radius-lg:  8px;
-  --radius-xl:  12px;
+  /* ── Radius ── */
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   12px;
+  --radius-xl:   16px;
   --radius-full: 9999px;
 
-  /* Shadows */
-  --shadow-sm:  0 1px 2px rgba(0,0,0,0.4);
-  --shadow-md:  0 4px 12px rgba(0,0,0,0.5);
-  --shadow-lg:  0 8px 24px rgba(0,0,0,0.6);
+  /* ── Shadows (soft, indigo-tinted) ── */
+  --shadow-sm:  0 1px 3px rgba(99,102,241,0.08), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md:  0 4px 12px rgba(99,102,241,0.10), 0 2px 4px rgba(0,0,0,0.05);
+  --shadow-lg:  0 8px 28px rgba(99,102,241,0.14), 0 4px 8px rgba(0,0,0,0.06);
 
-  /* Transitions */
+  /* ── Transitions ── */
   --transition-fast: 120ms ease;
   --transition-base: 200ms ease;
   --transition-slow: 300ms ease;
 
-  /* Layout */
-  --sidebar-width:  260px;
-  --content-max:    780px;
-  --notes-panel-width: 360px;
+  /* ── Layout ── */
+  --sidebar-width:      260px;
+  --content-max:        780px;
+  --notes-panel-width:  360px;
 }
 
 /* ============================================================
@@ -122,18 +118,12 @@ body {
 }
 
 a {
-  color: var(--accent-primary);
+  color: var(--accent-secondary);
   text-decoration: none;
 }
+a:hover { text-decoration: underline; }
 
-a:hover {
-  text-decoration: underline;
-}
-
-img, svg {
-  display: block;
-  max-width: 100%;
-}
+img, svg { display: block; max-width: 100%; }
 
 button {
   cursor: pointer;
@@ -141,44 +131,30 @@ button {
   font-size: inherit;
 }
 
-code, pre {
-  font-family: var(--font-mono);
-}
+code, pre { font-family: var(--font-mono); }
 
 h1, h2, h3, h4, h5, h6 {
   line-height: 1.3;
   color: var(--text-primary);
 }
 
-p {
-  color: var(--text-primary);
-}
+p { color: var(--text-primary); }
 
-/* Focus styles for accessibility */
+/* Focus styles */
 :focus-visible {
   outline: 2px solid var(--accent-primary);
   outline-offset: 2px;
   border-radius: var(--radius-sm);
 }
 
-/* Scrollbar styling */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-::-webkit-scrollbar-track {
-  background: var(--bg-base);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--border-strong);
-  border-radius: var(--radius-full);
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--text-muted);
-}
+/* Scrollbar */
+::-webkit-scrollbar              { width: 6px; height: 6px; }
+::-webkit-scrollbar-track        { background: var(--bg-base); }
+::-webkit-scrollbar-thumb        { background: var(--border-strong); border-radius: var(--radius-full); }
+::-webkit-scrollbar-thumb:hover  { background: var(--text-muted); }
 
 /* Selection */
 ::selection {
-  background: var(--accent-muted);
-  color: var(--text-primary);
+  background: #c7d2fe;  /* indigo-200 */
+  color: var(--accent-secondary);
 }

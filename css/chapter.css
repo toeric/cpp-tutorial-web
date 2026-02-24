@@ -215,9 +215,9 @@
 }
 
 .prose a {
-  color: var(--accent-primary);
+  color: var(--accent-secondary);
   text-decoration: underline;
-  text-decoration-color: rgba(88,166,255,0.4);
+  text-decoration-color: rgba(99,102,241,0.35);
 }
 
 .prose a:hover {
@@ -386,7 +386,7 @@
 }
 
 .complexity-table tr:nth-child(even) td {
-  background: rgba(255,255,255,0.02);
+  background: rgba(99,102,241,0.03);
 }
 
 .complexity-table td code {
