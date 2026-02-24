@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>C++ Reference — Interactive Tutorial</title>
+
+  <!-- Prism.js syntax highlighting -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+
+  <!-- App styles (load order matters) -->
+  <link rel="stylesheet" href="css/theme.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/chapter.css" />
+  <link rel="stylesheet" href="css/quiz.css" />
+  <link rel="stylesheet" href="css/search.css" />
+</head>
+<body>
+
+  <!-- Skip link for accessibility -->
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside id="sidebar" class="sidebar" role="navigation" aria-label="Chapter navigation">
+    <div class="sidebar-header">
+      <span class="sidebar-logo">C++</span>
+      <span class="sidebar-subtitle">Reference</span>
+      <button id="btn-close-sidebar" class="btn-icon" aria-label="Close sidebar" style="display:none">✕</button>
+    </div>
+
+    <div class="sidebar-search">
+      <button id="btn-search" class="btn-search-trigger" aria-label="Open search (/)">
+        <span class="search-icon">⌕</span>
+        <span class="search-hint">Search <kbd>/</kbd></span>
+      </button>
+    </div>
+
+    <nav class="chapter-nav" aria-label="Chapters">
+      <div id="chapter-list" class="chapter-list">
+        <!-- Populated by renderer.js -->
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <a href="#home" class="nav-link" aria-label="Home">⌂ Home</a>
+      <a href="#progress" class="nav-link" aria-label="Progress">◎ Progress</a>
+      <a href="#notes" class="nav-link" aria-label="Notes">✎ Notes</a>
+    </div>
+  </aside>
+
+  <!-- Mobile overlay -->
+  <div id="sidebar-overlay" class="sidebar-overlay" aria-hidden="true"></div>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main id="main-content" class="main-content" tabindex="-1">
+
+    <!-- Mobile header -->
+    <header class="mobile-header">
+      <button id="btn-open-sidebar" class="btn-icon" aria-label="Open navigation">☰</button>
+      <span class="mobile-title">C++ Reference</span>
+      <button id="btn-search-mobile" class="btn-icon" aria-label="Search">⌕</button>
+    </header>
+
+    <!-- Content mount point -->
+    <div id="app" class="app-container" role="main">
+      <div class="loading-state">
+        <div class="loading-spinner"></div>
+        <p>Loading…</p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ===== NOTES PANEL ===== -->
+  <aside id="notes-panel" class="notes-panel" aria-label="Notes panel" aria-hidden="true">
+    <div class="notes-panel-header">
+      <h2>My Notes</h2>
+      <div class="notes-actions">
+        <button id="btn-export-notes" class="btn btn-sm">Export JSON</button>
+        <button id="btn-close-notes" class="btn-icon" aria-label="Close notes">✕</button>
+      </div>
+    </div>
+    <div id="notes-panel-body" class="notes-panel-body">
+      <!-- Populated by notes.js -->
+    </div>
+  </aside>
+
+  <!-- ===== SEARCH OVERLAY ===== -->
+  <div id="search-overlay" class="search-overlay" role="dialog" aria-modal="true" aria-label="Search" aria-hidden="true">
+    <div class="search-container">
+      <div class="search-input-wrap">
+        <span class="search-icon-lg">⌕</span>
+        <input
+          id="search-input"
+          type="search"
+          class="search-input"
+          placeholder="Search chapters, topics, keywords…"
+          autocomplete="off"
+          spellcheck="false"
+          aria-label="Search"
+        />
+        <kbd class="search-esc-hint">Esc</kbd>
+      </div>
+      <div id="search-results" class="search-results" role="listbox" aria-label="Search results">
+        <p class="search-empty">Start typing to search…</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== CDN SCRIPTS ===== -->
+  <!-- Fuse.js fuzzy search -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/7.0.0/fuse.min.js"></script>
+  <!-- Prism.js core + C++ language -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+  <!-- Data files (loaded first — no imports/exports, set global vars) -->
+  <script src="data/chapters/01-stl-containers.js"></script>
+  <script src="data/chapters/02-virtual-functions.js"></script>
+  <script src="data/chapters/03-templates.js"></script>
+  <script src="data/chapters/04-lvalue-rvalue.js"></script>
+  <script src="data/chapters/05-atomic-mutex.js"></script>
+  <script src="data/quizzes/quiz-01.js"></script>
+  <script src="data/quizzes/quiz-02.js"></script>
+  <script src="data/quizzes/quiz-03.js"></script>
+  <script src="data/quizzes/quiz-04.js"></script>
+  <script src="data/quizzes/quiz-05.js"></script>
+  <script src="data/search-index.js"></script>
+
+  <!-- App scripts (dependency order) -->
+  <script src="js/storage.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/router.js"></script>
+  <script src="js/progress.js"></script>
+  <script src="js/notes.js"></script>
+  <script src="js/search.js"></script>
+  <script src="js/quiz.js"></script>
+  <script src="js/renderer.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+</html>
