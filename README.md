@@ -13,7 +13,7 @@ A fully static, interactive C++ reference website. No installation, no server, n
 ## Features
 
 - **5 Chapters** covering core C++ topics with concise explanations and code examples
-- **Interactive Quizzes** — 8–10 questions per chapter with instant feedback and explanations
+- **Interactive Quizzes** — 8–13 questions per chapter with instant feedback and explanations
 - **Fuzzy Search** — press `/` or `Ctrl+K` to search across all chapters and sections
 - **Personal Notes** — add notes to any section; stored locally in your browser
 - **Progress Tracking** — read status and quiz scores saved to `localStorage`
@@ -24,8 +24,8 @@ A fully static, interactive C++ reference website. No installation, no server, n
 
 | # | Topic | Key Concepts |
 |---|---|---|
-| 1 | STL Containers | `vector`, `array`, `string`, `unordered_map`, `map` |
-| 2 | Virtual Functions | vtable, dynamic dispatch, `override`, CRTP |
+| 1 | STL Containers | `vector`, `array`, `string`, `string_view`, `set`, `unordered_set`, `deque`, `queue`, `map`, `unordered_map`, `emplace` |
+| 2 | Virtual Functions | why virtual, vtable, dynamic dispatch, `override`, pure virtual, CRTP, `std::variant` + `std::visit` |
 | 3 | Templates | function/class templates, variadic templates, concepts |
 | 4 | Value Categories & Move Semantics | lvalue/rvalue, `std::move`, `std::forward`, perfect forwarding |
 | 5 | Atomics & Mutexes | `std::atomic`, `mutex`, `lock_guard`, deadlock prevention |

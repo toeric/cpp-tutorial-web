@@ -89,6 +89,61 @@ var q1 = {
         { id: 'd', text: 'Copies the vector n times.' }
       ],
       explanation: 'reserve(n) ensures capacity >= n without changing size or initializing elements. It prevents reallocation (and iterator invalidation) for subsequent push_back calls as long as size stays below n.'
+    },
+    {
+      id: 'q1-9',
+      text: 'Which of the following is a safe use of std::string_view?',
+      options: [
+        { id: 'a', text: 'std::string_view sv = std::string("hello"); // stored for later use' },
+        { id: 'b', text: 'Returning a string_view to a local std::string from a function.' },
+        { id: 'c', text: 'Accepting a string_view as a read-only function parameter.', correct: true },
+        { id: 'd', text: 'Passing string_view::data() to fopen() for a non-literal string.' }
+      ],
+      explanation: 'string_view is safest as a function parameter — it accepts std::string, literals, and char[] without allocation. Storing a view of a temporary or local string leads to a dangling pointer (UB). string_view::data() is not guaranteed to be null-terminated, so passing it to C APIs like fopen() is unsafe.'
+    },
+    {
+      id: 'q1-10',
+      text: 'What is the time complexity of sv.substr(pos, len) on a std::string_view compared to std::string::substr?',
+      options: [
+        { id: 'a', text: 'Both are O(len) — they both copy characters.' },
+        { id: 'b', text: 'string_view::substr is O(1); std::string::substr is O(len).', correct: true },
+        { id: 'c', text: 'Both are O(1) — modern compilers optimize string copies away.' },
+        { id: 'd', text: 'string_view::substr is O(n); std::string::substr is O(1).' }
+      ],
+      explanation: 'string_view::substr simply adjusts the pointer and length — O(1), no allocation. std::string::substr allocates and copies len characters into a new std::string — O(len).'
+    },
+    {
+      id: 'q1-11',
+      text: 'Which container stores unique elements in sorted order and supports lower_bound / upper_bound range queries?',
+      options: [
+        { id: 'a', text: 'std::unordered_set' },
+        { id: 'b', text: 'std::vector (with manual deduplication)' },
+        { id: 'c', text: 'std::set', correct: true },
+        { id: 'd', text: 'std::deque' }
+      ],
+      explanation: 'std::set is a red-black tree of unique keys kept in sorted order. It supports O(log n) lower_bound and upper_bound for range queries. std::unordered_set has O(1) lookup but no ordering, so range queries are not available.'
+    },
+    {
+      id: 'q1-12',
+      text: 'What is the time complexity of push_front() on std::deque?',
+      options: [
+        { id: 'a', text: 'O(n) — all elements must be shifted right.' },
+        { id: 'b', text: 'O(log n)' },
+        { id: 'c', text: 'O(1)', correct: true },
+        { id: 'd', text: 'Amortized O(1) — it may trigger reallocation.' }
+      ],
+      explanation: 'std::deque uses a segmented buffer: it maintains a map of fixed-size chunks so it can insert at the front by allocating a new chunk (or using space in the front chunk). This is strictly O(1) — no elements are shifted and no full reallocation occurs. By contrast, std::vector::insert at the front is O(n) because every element must be moved.'
+    },
+    {
+      id: 'q1-13',
+      text: 'What does std::map::try_emplace(key, args...) do if the key already exists?',
+      options: [
+        { id: 'a', text: 'It overwrites the existing value with a newly constructed one.' },
+        { id: 'b', text: 'It does nothing — the map is unchanged and no value object is constructed.', correct: true },
+        { id: 'c', text: 'It throws std::runtime_error.' },
+        { id: 'd', text: 'It inserts a duplicate entry under the same key.' }
+      ],
+      explanation: 'try_emplace (C++17) is a "insert if absent" operation. If the key exists, the call is a no-op and the value arguments are never forwarded to a constructor — no wasted allocation. This contrasts with operator[], which default-constructs a value even when you only want to check existence.'
     }
   ]
 };

@@ -56,17 +56,67 @@ var searchIndex = [
     hash: '#chapter/1/map-overview'
   },
   {
+    id: 'idx-1-sv',
+    chapterId: 1,
+    sectionId: 'string-view',
+    chapterTitle: 'STL Containers',
+    sectionTitle: 'std::string_view — Non-Owning Views',
+    body: 'string_view non-owning handle pointer length zero allocation read-only O(1) substr remove_prefix remove_suffix starts_with ends_with dangling view lifetime null-terminated c_str parameter passing no copy',
+    tags: ['string_view', 'non-owning', 'zero-copy', 'O(1) substr', 'dangling', 'lifetime', 'parameter'],
+    hash: '#chapter/1/string-view'
+  },
+  {
+    id: 'idx-1-set',
+    chapterId: 1,
+    sectionId: 'set-unordered-set',
+    chapterTitle: 'STL Containers',
+    sectionTitle: 'std::set & std::unordered_set',
+    body: 'set unordered_set unique keys membership test deduplication sorted red-black tree O(log n) hash table O(1) lower_bound upper_bound range query multiset contains count iteration',
+    tags: ['set', 'unordered_set', 'unique', 'membership', 'deduplication', 'sorted', 'multiset'],
+    hash: '#chapter/1/set-unordered-set'
+  },
+  {
+    id: 'idx-1-deque',
+    chapterId: 1,
+    sectionId: 'queue-deque',
+    chapterTitle: 'STL Containers',
+    sectionTitle: 'std::deque & std::queue',
+    body: 'deque double-ended queue segmented buffer push_front push_back pop_front pop_back O(1) both ends no reallocation queue FIFO adapter push pop front back BFS breadth-first search',
+    tags: ['deque', 'queue', 'push_front', 'FIFO', 'BFS', 'double-ended', 'container adapter'],
+    hash: '#chapter/1/queue-deque'
+  },
+  {
+    id: 'idx-1-emplace',
+    chapterId: 1,
+    sectionId: 'emplace-construct',
+    chapterTitle: 'STL Containers',
+    sectionTitle: 'emplace — In-Place Construction',
+    body: 'emplace emplace_back emplace_front in-place construct placement new no temporary no copy move push_back vs emplace_back try_emplace C++17 non-copyable unique_ptr map insert avoid wasted construction',
+    tags: ['emplace', 'emplace_back', 'try_emplace', 'in-place', 'push_back', 'no copy', 'non-copyable'],
+    hash: '#chapter/1/emplace-construct'
+  },
+  {
     id: 'idx-1-6',
     chapterId: 1,
     sectionId: 'container-choice',
     chapterTitle: 'STL Containers',
     sectionTitle: 'Choosing the Right Container',
-    body: 'container choice decision guide vector default sequence array fixed size unordered_map fast lookup map sorted deque unique set when to use which container',
+    body: 'container choice decision guide vector default sequence array fixed size deque queue string_view unordered_set set unordered_map fast lookup map sorted when to use which container',
     tags: ['container choice', 'decision', 'vector vs map', 'when to use'],
     hash: '#chapter/1/container-choice'
   },
 
   // ── Chapter 2: Virtual Functions ──────────────────────────
+  {
+    id: 'idx-2-0',
+    chapterId: 2,
+    sectionId: 'why-virtual',
+    chapterTitle: 'Virtual Functions & Polymorphism',
+    sectionTitle: 'Why Virtual Functions?',
+    body: 'why virtual static dispatch base pointer derived always calls base Logger FileLogger game entity loop Player Enemy Particle update draw heterogeneous collection polymorphism motivation',
+    tags: ['why virtual', 'static dispatch', 'polymorphism motivation', 'entity loop', 'base pointer'],
+    hash: '#chapter/2/why-virtual'
+  },
   {
     id: 'idx-2-1',
     chapterId: 2,
@@ -103,8 +153,8 @@ var searchIndex = [
     sectionId: 'virtual-costs',
     chapterTitle: 'Virtual Functions & Polymorphism',
     sectionTitle: 'Costs & Alternatives',
-    body: 'virtual dispatch cost 1-5ns no inlining CRTP curiously recurring template pattern compile-time polymorphism std::variant std::visit static dispatch devirtualization',
-    tags: ['virtual cost', 'CRTP', 'variant', 'visit', 'devirtualize', 'performance'],
+    body: 'virtual dispatch cost 1-5ns no inlining CRTP curiously recurring template pattern compile-time polymorphism std::variant std::visit overloaded visitor closed set value semantics no heap static dispatch devirtualization',
+    tags: ['virtual cost', 'CRTP', 'variant', 'visit', 'overloaded', 'closed set', 'devirtualize', 'performance'],
     hash: '#chapter/2/virtual-costs'
   },
 
