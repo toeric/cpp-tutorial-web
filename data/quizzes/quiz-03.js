@@ -40,11 +40,11 @@ var q3 = {
       text: 'What does the C++17 fold expression (args + ...) compute for sum(1, 2, 3, 4)?',
       options: [
         { id: 'a', text: 'It concatenates the args as strings.' },
-        { id: 'b', text: 'It applies + left-to-right: ((1+2)+3)+4 = 10.', correct: true },
-        { id: 'c', text: 'It applies + right-to-left: 1+(2+(3+4)) = 10.' },
+        { id: 'b', text: 'It applies + left-to-right: ((1+2)+3)+4 = 10.' },
+        { id: 'c', text: 'It applies + right-to-left: 1+(2+(3+4)) = 10.', correct: true },
         { id: 'd', text: 'It fails to compile — fold expressions require at least 2 arguments.' }
       ],
-      explanation: '(args + ...) is a unary right fold, expanding to 1+(2+(3+4)) = 10 — same result for addition since + is associative. For subtraction order matters: (args - ...) would be 1-(2-(3-4)) = -2, not -8. The left fold (...+args) gives ((1+2)+3)+4.'
+      explanation: '(args + ...) is a unary RIGHT fold — the pack is on the left of the operator. It expands as: 1+(2+(3+4)) = 10, associating right-to-left. The LEFT fold is (... + args), expanding as ((1+2)+3)+4. For + the numeric result is the same, but order matters for non-associative operators: (args - ...) = 1-(2-(3-4)) = 2, not ((1-2)-3)-4 = -8.'
     },
     {
       id: 'q3-5',

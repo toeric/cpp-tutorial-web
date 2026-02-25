@@ -20,10 +20,14 @@ function renderSidebar() {
 
   list.innerHTML = _chapterList.map(ch => {
     const cp = getChapterProgress(ch.id);
+    const lvlBadge = ch.level === 'advanced'
+      ? '<span class="badge badge-advanced sidebar-level-badge">Adv</span>'
+      : '<span class="badge badge-basic sidebar-level-badge">Basic</span>';
     return `
       <a href="#chapter/${ch.id}" class="chapter-nav-item" data-chapter-id="${ch.id}">
         <span class="chapter-num">${String(ch.id).padStart(2, '0')}</span>
         <span class="chapter-title-text">${escapeHTML(ch.title)}</span>
+        ${lvlBadge}
         <span
           class="chapter-progress-dot ${cp.read ? 'complete' : ''}"
           data-chapter-dot="${ch.id}"
@@ -78,12 +82,16 @@ function renderHome(container) {
       ${_chapterList.map(ch => {
         const cp = getChapterProgress(ch.id);
         const tags = (ch.tags || []).slice(0, 3).map(t => `<span class="tag">${escapeHTML(t)}</span>`).join('');
+        const levelBadge = ch.level === 'advanced'
+          ? '<span class="badge badge-advanced">Advanced</span>'
+          : '<span class="badge badge-basic">Basic</span>';
         return `
           <a href="#chapter/${ch.id}" class="chapter-card" tabindex="0">
             <div class="chapter-card-num">Chapter ${ch.id}</div>
             <div class="chapter-card-title">${escapeHTML(ch.title)}</div>
             <div class="chapter-card-desc">${escapeHTML(ch.description || '')}</div>
             <div class="chapter-card-meta">
+              ${levelBadge}
               ${cp.read ? '<span class="read-badge">✓ Read</span>' : ''}
               ${cp.quizScore != null ? `<span class="badge badge-info">Quiz: ${cp.quizScore}%</span>` : ''}
               <span class="chapter-card-time">~${ch.estimatedMinutes} min</span>
@@ -126,6 +134,9 @@ function renderChapter(container, chapter) {
       <header class="chapter-header">
         <div class="chapter-meta">
           <span class="chapter-num-badge">Chapter ${chapter.id}</span>
+          ${chapter.level === 'advanced'
+            ? '<span class="badge badge-advanced">Advanced</span>'
+            : '<span class="badge badge-basic">Basic</span>'}
           <span class="chapter-time">~${chapter.estimatedMinutes} min read</span>
           ${cp.read ? '<span class="read-badge">✓ Read</span>' : ''}
         </div>

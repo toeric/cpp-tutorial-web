@@ -3,6 +3,7 @@ var ch2 = {
   slug: 'virtual-functions',
   title: 'Virtual Functions & Polymorphism',
   description: 'How virtual dispatch works, the vtable mechanism, override/final, pure virtual interfaces, costs of dynamic polymorphism, and alternatives like std::variant + std::visit.',
+  level: 'basic',
   estimatedMinutes: 16,
   tags: ['virtual', 'vtable', 'polymorphism', 'override', 'inheritance', 'dynamic dispatch', 'pure virtual', 'variant', 'visit', 'CRTP'],
 

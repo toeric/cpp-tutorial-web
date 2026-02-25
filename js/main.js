@@ -5,8 +5,8 @@
 
 
 
-var _mainChapters = [ch1, ch2, ch3, ch4, ch5];
-var _mainQuizzes = { 1: q1, 2: q2, 3: q3, 4: q4, 5: q5 };
+var _mainChapters = [ch1, ch2, ch3, ch6, ch5, ch4];
+var _mainQuizzes  = { 1: q1, 2: q2, 3: q3, 4: q6, 5: q5, 6: q4 };
 
 const app = document.getElementById('app');
 

@@ -139,6 +139,18 @@
   border-color: var(--border-default);
 }
 
+.badge-basic {
+  background: #ecfdf5;
+  color: #047857;
+  border-color: #6ee7b7;
+}
+
+.badge-advanced {
+  background: #fff7ed;
+  color: #c2410c;
+  border-color: #fdba74;
+}
+
 /* ── CARDS ── */
 .card {
   background: var(--bg-surface);

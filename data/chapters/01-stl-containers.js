@@ -3,6 +3,7 @@ var ch1 = {
   slug: 'stl-containers',
   title: 'STL Containers',
   description: 'Core sequence and associative containers: vector, array, string, string_view, set, deque, queue, map, unordered_map — when to use each and how they work under the hood.',
+  level: 'basic',
   estimatedMinutes: 22,
   tags: ['vector', 'array', 'string', 'string_view', 'set', 'unordered_set', 'deque', 'queue', 'map', 'unordered_map', 'emplace', 'STL', 'containers'],
 

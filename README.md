@@ -12,7 +12,7 @@ A fully static, interactive C++ reference website. No installation, no server, n
 
 ## Features
 
-- **5 Chapters** covering core C++ topics with concise explanations and code examples
+- **6 Chapters** covering core C++ topics with concise explanations and code examples
 - **Interactive Quizzes** — 8–13 questions per chapter with instant feedback and explanations
 - **Fuzzy Search** — press `/` or `Ctrl+K` to search across all chapters and sections
 - **Personal Notes** — add notes to any section; stored locally in your browser
@@ -22,13 +22,14 @@ A fully static, interactive C++ reference website. No installation, no server, n
 
 ## Chapters
 
-| # | Topic | Key Concepts |
-|---|---|---|
-| 1 | STL Containers | `vector`, `array`, `string`, `string_view`, `set`, `unordered_set`, `deque`, `queue`, `map`, `unordered_map`, `emplace` |
-| 2 | Virtual Functions | why virtual, vtable, dynamic dispatch, `override`, pure virtual, CRTP, `std::variant` + `std::visit` |
-| 3 | Templates | function/class templates, variadic templates, concepts |
-| 4 | Value Categories & Move Semantics | lvalue/rvalue, `std::move`, `std::forward`, perfect forwarding |
-| 5 | Atomics & Mutexes | `std::atomic`, `mutex`, `lock_guard`, deadlock prevention |
+| # | Level | Topic | Key Concepts |
+|---|---|---|---|
+| 1 | Basic | STL Containers | `vector`, `array`, `string`, `string_view`, `set`, `unordered_set`, `deque`, `queue`, `map`, `unordered_map`, `emplace` |
+| 2 | Basic | Virtual Functions | why virtual, vtable, dynamic dispatch, `override`, pure virtual, CRTP, `std::variant` + `std::visit` |
+| 3 | Basic | Templates | type deduction, CTAD, function/class templates, variadic templates, fold expressions, concepts |
+| 4 | Basic | Lambda Expressions & std::function | lambda syntax, captures, `mutable`, `std::function`, type erasure, higher-order functions, STL algorithms |
+| 5 | Basic | Atomics & Mutexes | `std::atomic`, `mutex`, `lock_guard`, deadlock prevention |
+| 6 | Advanced | Value Categories & Move Semantics | lvalue/rvalue, move semantics, `std::move` (with examples), `std::forward`, perfect forwarding |
 
 ## Keyboard Shortcuts
 
@@ -70,8 +71,8 @@ All data is stored in your browser's `localStorage` under the `cpp_tutorial__` n
 │   ├── storage.js          # localStorage wrapper
 │   └── utils.js            # Helpers (escapeHTML, debounce, etc.)
 ├── data/
-│   ├── chapters/           # Chapter content (01–05)
-│   ├── quizzes/            # Quiz questions (01–05)
+│   ├── chapters/           # Chapter content (01–06)
+│   ├── quizzes/            # Quiz questions (01–06)
 │   └── search-index.js     # Pre-built Fuse.js index
 └── assets/
     └── diagrams/           # SVG diagrams

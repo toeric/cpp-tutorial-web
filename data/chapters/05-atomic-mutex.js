@@ -3,6 +3,7 @@ var ch5 = {
   slug: 'atomic-mutex',
   title: 'Atomics & Mutexes',
   description: 'Thread-safe programming with std::atomic, std::mutex, RAII lock guards, condition variables, common concurrency pitfalls, and when to use each tool.',
+  level: 'advanced',
   estimatedMinutes: 14,
   tags: ['atomic', 'mutex', 'thread', 'lock_guard', 'deadlock', 'race condition', 'concurrency', 'memory order'],
 

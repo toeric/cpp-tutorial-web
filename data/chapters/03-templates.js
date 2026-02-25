@@ -3,8 +3,9 @@ var ch3 = {
   slug: 'templates',
   title: 'Templates',
   description: 'Function and class templates, template specialization, variadic templates, and when templates shine vs. where they hurt — with practical examples.',
-  estimatedMinutes: 13,
-  tags: ['templates', 'generics', 'SFINAE', 'concepts', 'variadic', 'specialization', 'meta-programming'],
+  level: 'basic',
+  estimatedMinutes: 17,
+  tags: ['templates', 'generics', 'type deduction', 'CTAD', 'concepts', 'variadic', 'fold expression', 'specialization', 'meta-programming'],
 
   sections: [
     {
@@ -69,6 +70,99 @@ std::string to_str<bool>(bool val) {
 
 to_str(42);     // → "42"
 to_str(true);   // → "true"  (uses specialization)`
+        }
+      ]
+    },
+
+    {
+      id: 'template-deduction',
+      title: 'Template Type Deduction',
+      content: `<p>Type deduction happens at the <strong>call site</strong>, every time a template function is called with concrete arguments. The compiler pattern-matches each argument's type against the parameter pattern to determine what T (or other type parameters) must be.</p>
+<h3>The basic rules</h3>
+<ul>
+  <li>The compiler deduces T from function <em>arguments</em>, not from the return type.</li>
+  <li>Each argument that involves T must agree on the same T — conflicting deductions are an error.</li>
+  <li>References and top-level <code>const</code> are stripped when deducing T (so <code>const int&</code> deduces T = <code>int</code>, not <code>const int</code>).</li>
+  <li>T in a <em>non-deducible context</em> (return type only, or nested inside <code>Container&lt;T&gt;::value_type</code>) cannot be deduced — you must specify it explicitly.</li>
+</ul>
+<h3>C++17 — Class Template Argument Deduction (CTAD)</h3>
+<p>Before C++17 you had to spell out type arguments when constructing class templates. CTAD lets the compiler deduce them from the constructor arguments, just like function templates:</p>
+<div class="callout tip">
+  <span class="callout-icon">✓</span>
+  <div class="callout-content"><p>Use CTAD to reduce boilerplate: <code>std::pair p{1, 2.5}</code> instead of <code>std::pair&lt;int, double&gt; p{1, 2.5}</code>. Works for <code>std::vector</code>, <code>std::optional</code>, <code>std::lock_guard</code>, and any class with appropriate deduction guides.</p></div>
+</div>`,
+      codeBlocks: [
+        {
+          id: 'deduction-rules',
+          language: 'cpp',
+          caption: 'When deduction works and when it fails',
+          code: `// ── Basic deduction from argument type ───────────────────────
+template<typename T>
+void show(T val) { /* ... */ }
+
+show(42);         // T = int         (from int literal)
+show(3.14);       // T = double      (from double literal)
+show("hello");    // T = const char* (from string literal)
+
+// ── References: T deduces to the underlying type ─────────────
+template<typename T>
+void by_ref(const T& val) { /* ... */ }
+
+int x = 5;
+by_ref(x);   // T = int  (not int& — ref-ness stripped from T)
+by_ref(42);  // T = int  (rvalue binds to const T&)
+
+// ── Conflicting deductions — compile error ────────────────────
+template<typename T>
+T max_val(T a, T b) { return (a > b) ? a : b; }
+
+max_val(3, 5);          // OK:  T = int
+max_val(3.0, 5.0);      // OK:  T = double
+// max_val(3, 5.0);     // ❌  T can't be both int and double
+max_val<double>(3, 5.0); // ✓  explicit arg resolves conflict; int → double
+
+// ── Non-deducible: T only in return type ─────────────────────
+template<typename T>
+T zero() { return T{}; }
+
+// zero();          // ❌ can't deduce T from return type alone
+zero<int>();        // ✓
+zero<std::string>(); // ✓`
+        },
+        {
+          id: 'ctad-examples',
+          language: 'cpp',
+          caption: 'C++17 CTAD — class template argument deduction',
+          code: `#include <vector>
+#include <utility>
+#include <optional>
+#include <mutex>
+
+// Before C++17 — must spell out all type arguments
+std::pair<int, double>          p1{1, 2.5};
+std::vector<std::string>        v1{"hello", "world"};
+std::optional<int>              o1{42};
+std::lock_guard<std::mutex>     lk1{mtx};
+
+// C++17 CTAD — compiler deduces from constructor arguments
+std::pair   p2{1, 2.5};          // deduced: pair<int, double>
+std::vector v2{"hello"s, "world"s}; // deduced: vector<string>
+std::optional o2{42};             // deduced: optional<int>
+std::lock_guard lk2{mtx};         // deduced: lock_guard<std::mutex>
+
+// ── Deduction guides — how CTAD knows what to infer ──────────
+// The standard library ships deduction guides for its templates.
+// You can write your own for custom class templates:
+
+template<typename T>
+struct Wrapper { T value; };
+
+// Custom deduction guide
+template<typename T>
+Wrapper(T) -> Wrapper<T>;
+
+Wrapper w{42};      // deduced: Wrapper<int>
+Wrapper w2{3.14};   // deduced: Wrapper<double>`
         }
       ]
     },

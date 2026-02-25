@@ -1,9 +1,10 @@
 var ch4 = {
-  id: 4,
+  id: 6,
   slug: 'lvalue-rvalue',
   title: 'Value Categories & Move Semantics',
   description: 'lvalue vs rvalue, move constructors and assignment, std::move and std::forward, perfect forwarding, and practical rules for writing efficient code.',
-  estimatedMinutes: 14,
+  level: 'advanced',
+  estimatedMinutes: 18,
   tags: ['lvalue', 'rvalue', 'move semantics', 'std::move', 'std::forward', 'perfect forwarding', 'xvalue', 'universal reference'],
 
   sections: [
@@ -121,43 +122,105 @@ Buffer b = std::move(a);  // Move ctor: O(1), a is now empty
     {
       id: 'std-move-forward',
       title: 'std::move and std::forward',
-      content: `
-<p><code>std::move(x)</code> casts <code>x</code> to <code>T&amp;&amp;</code> — it's an unconditional "I'm done with this, please move it." Use it when you explicitly want to transfer ownership from a named variable.</p>
-<p><code>std::forward&lt;T&gt;(x)</code> is a <em>conditional</em> cast used in generic code (perfect forwarding). It preserves the original value category: if the caller passed an lvalue, forward passes an lvalue; if the caller passed an rvalue, forward passes an rvalue.</p>
+      content: `<p><code>std::move(x)</code> is an unconditional cast to <code>T&amp;&amp;</code> — it signals "I'm done with this value, transfer its resources." It does <em>zero work</em> at runtime; the actual resource transfer happens in the move constructor or move assignment that follows.</p>
+<p><code>std::forward&lt;T&gt;(x)</code> is a <em>conditional</em> cast used only in generic (template) code. It preserves the original value category: lvalue in → lvalue out; rvalue in → rvalue out. Without it, named parameters are always lvalues inside a function body, silently forcing copies even when the caller passed an rvalue.</p>
 <div class="callout danger">
   <span class="callout-icon">✗</span>
-  <div class="callout-content"><p><strong>Don't std::move a return value:</strong> <code>return std::move(local);</code> prevents NRVO (Named Return Value Optimization) and may be slower than plain <code>return local;</code>. Let the compiler apply copy elision automatically.</p></div>
+  <div class="callout-content"><p><strong>Don't <code>std::move</code> a return value:</strong> <code>return std::move(local);</code> disables NRVO (Named Return Value Optimization) and may be slower than a plain <code>return local;</code>. Let the compiler apply copy elision automatically.</p></div>
 </div>`,
       codeBlocks: [
         {
-          id: 'perfect-forwarding',
+          id: 'move-concrete-benefits',
           language: 'cpp',
-          caption: 'Perfect forwarding with std::forward',
-          code: `// Without perfect forwarding — forces a copy for lvalues
-template<typename T>
-void wrapper_bad(T val) {
-    target(val);  // Always copies
+          caption: 'std::move — concrete benefits with real examples',
+          code: `#include <vector>
+#include <string>
+#include <memory>
+
+// ── 1. Avoid copying a large container ────────────────────────
+std::vector<int> load() {
+    std::vector<int> v(1'000'000);
+    // ... fill v ...
+    return v;  // NRVO: no copy, no move — constructed in-place
 }
 
-// With perfect forwarding — preserves value category
-template<typename T>
-void wrapper(T&& arg) {           // T&& is a "universal reference" (forwarding ref)
-    target(std::forward<T>(arg)); // Forwards as lvalue or rvalue, matching caller
-}
+void process(std::vector<int> data);  // takes by value (makes a copy or moves)
 
-void target(const std::string& s) { /* copy version */ }
-void target(std::string&& s)      { /* move version */ }
+auto data = load();
+process(data);             // ❌ copies 1 000 000 ints — O(n), expensive
+process(std::move(data));  // ✓ moves in O(1), data is now empty
+
+// ── 2. Inserting a string into a container ────────────────────
+std::vector<std::string> log_entries;
+std::string line = build_line();        // expensive to build, 200 chars
+
+log_entries.push_back(line);            // copies — line still usable
+log_entries.push_back(std::move(line)); // moves — line is now "", O(1)
+
+// ── 3. Transferring unique ownership (unique_ptr) ─────────────
+// unique_ptr cannot be copied — move is the ONLY way to transfer ownership
+auto p1 = std::make_unique<int>(42);
+
+// std::unique_ptr<int> p2 = p1;       // ❌ error: copy constructor is deleted
+std::unique_ptr<int> p2 = std::move(p1); // ✓ p1 == nullptr, p2 owns the int
+
+// ── 4. Sink parameter pattern — accept then move internally ───
+class Config {
+public:
+    void set_name(std::string name) {   // caller passes copy or move
+        name_ = std::move(name);        // move from parameter into member O(1)
+    }
+private:
+    std::string name_;
+};
+
+Config cfg;
+std::string n = "my_config";
+cfg.set_name(n);                // caller keeps n: copies into parameter, then moves
+cfg.set_name(std::move(n));     // caller gives up n: moves into parameter, then moves
+cfg.set_name("default");        // literal: constructed in-place, then moves`
+        },
+        {
+          id: 'forward-why-needed',
+          language: 'cpp',
+          caption: 'std::forward — why it is needed and how to use it',
+          code: `#include <string>
+#include <iostream>
+
+// Target has two overloads — copy and move
+void store(const std::string& s) { std::cout << "copy: " << s << '\\n'; }
+void store(std::string&& s)      { std::cout << "move: " << s << '\\n'; }
+
+// ── WITHOUT std::forward — value category is always lost ─────
+template<typename T>
+void bad_wrap(T&& arg) {
+    // 'arg' is always an lvalue here — named parameters always are
+    store(arg);  // always calls the copy overload!
+}
 
 std::string s = "hello";
-wrapper(s);             // T = string& → target gets lvalue ref (no copy)
-wrapper("world");       // T = string  → target gets rvalue ref (move)
-wrapper(std::move(s));  // T = string  → target gets rvalue ref (move)
+bad_wrap(s);             // copy: hello  ✓ correct (expected copy)
+bad_wrap(std::move(s));  // copy: hello  ❌ wrong! rvalue became lvalue
 
-// make_unique uses perfect forwarding internally:
-// template<typename T, typename... Args>
-// unique_ptr<T> make_unique(Args&&... args) {
-//     return unique_ptr<T>(new T(std::forward<Args>(args)...));
-// }`
+// ── WITH std::forward — category is preserved ─────────────────
+template<typename T>
+void wrap(T&& arg) {              // T&& = forwarding reference (not just rvalue ref)
+    store(std::forward<T>(arg));  // if T=string&  → forward as lvalue → copy overload
+}                                 // if T=string   → forward as rvalue → move overload
+
+std::string t = "world";
+wrap(t);              // T=string&  → store gets lvalue  → "copy: world" ✓
+wrap(std::move(t));   // T=string   → store gets rvalue  → "move: world" ✓
+wrap("temp");         // T=string   → store gets rvalue  → "move: temp"  ✓
+
+// ── Real-world: forwarding to a constructor ───────────────────
+// This is what std::make_unique / emplace_back do internally:
+template<typename T, typename... Args>
+std::unique_ptr<T> make(Args&&... args) {
+    return std::unique_ptr<T>(new T(std::forward<Args>(args)...));
+    //                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    //  Each arg forwarded with its original value category preserved
+}`
         }
       ]
     },

@@ -160,6 +160,16 @@ var searchIndex = [
 
   // ── Chapter 3: Templates ───────────────────────────────────
   {
+    id: 'idx-3-0',
+    chapterId: 3,
+    sectionId: 'template-deduction',
+    chapterTitle: 'Templates',
+    sectionTitle: 'Template Type Deduction',
+    body: 'type deduction call site argument type T deduced reference stripped const stripped conflicting deduction non-deducible context return type only explicit template argument CTAD class template argument deduction C++17 deduction guide pair vector optional lock_guard',
+    tags: ['type deduction', 'CTAD', 'deduction guide', 'explicit template', 'non-deducible', 'call site'],
+    hash: '#chapter/3/template-deduction'
+  },
+  {
     id: 'idx-3-1',
     chapterId: 3,
     sectionId: 'function-templates',
@@ -200,46 +210,46 @@ var searchIndex = [
     hash: '#chapter/3/template-tradeoffs'
   },
 
-  // ── Chapter 4: lvalue / rvalue ─────────────────────────────
+  // ── Chapter 4→6: lvalue / rvalue ───────────────────────────
   {
     id: 'idx-4-1',
-    chapterId: 4,
+    chapterId: 6,
     sectionId: 'value-categories',
     chapterTitle: 'Value Categories & Move Semantics',
     sectionTitle: 'Value Categories: lvalue, rvalue, xvalue',
     body: 'lvalue rvalue xvalue prvalue value category identity addressable temporary expression glvalue std::move cast T&&',
     tags: ['lvalue', 'rvalue', 'xvalue', 'prvalue', 'glvalue', 'value category'],
-    hash: '#chapter/4/value-categories'
+    hash: '#chapter/6/value-categories'
   },
   {
     id: 'idx-4-2',
-    chapterId: 4,
+    chapterId: 6,
     sectionId: 'move-semantics',
     chapterTitle: 'Value Categories & Move Semantics',
     sectionTitle: 'Move Constructors & Move Assignment',
     body: 'move constructor move assignment steal resources pointer swap O(1) rule of five noexcept valid empty state',
     tags: ['move constructor', 'move assignment', 'rule of five', 'noexcept', 'steal resources'],
-    hash: '#chapter/4/move-semantics'
+    hash: '#chapter/6/move-semantics'
   },
   {
     id: 'idx-4-3',
-    chapterId: 4,
+    chapterId: 6,
     sectionId: 'std-move-forward',
     chapterTitle: 'Value Categories & Move Semantics',
     sectionTitle: 'std::move and std::forward',
-    body: 'std::move unconditional cast rvalue std::forward perfect forwarding conditional preserves value category universal reference forwarding reference NRVO return value optimization',
-    tags: ['std::move', 'std::forward', 'perfect forwarding', 'NRVO', 'forwarding reference'],
-    hash: '#chapter/4/std-move-forward'
+    body: 'std::move unconditional cast rvalue transfer ownership avoid copy vector string unique_ptr sink parameter std::forward perfect forwarding conditional preserves value category universal reference forwarding reference NRVO return value optimization bad_wrap wrap',
+    tags: ['std::move', 'std::forward', 'perfect forwarding', 'NRVO', 'forwarding reference', 'ownership transfer', 'value category lost'],
+    hash: '#chapter/6/std-move-forward'
   },
   {
     id: 'idx-4-4',
-    chapterId: 4,
+    chapterId: 6,
     sectionId: 'move-practical',
     chapterTitle: 'Value Categories & Move Semantics',
     sectionTitle: 'Practical Guidelines',
     body: 'rule of zero sink parameter return by value move into container noexcept moved-from state reuse practical guidelines',
     tags: ['rule of zero', 'sink parameter', 'move guidelines', 'best practices'],
-    hash: '#chapter/4/move-practical'
+    hash: '#chapter/6/move-practical'
   },
 
   // ── Chapter 5: Atomics & Mutex ─────────────────────────────
@@ -292,5 +302,57 @@ var searchIndex = [
     body: 'concurrency guidelines atomic counter flag mutex protect data condition variable producer consumer shared_mutex read-heavy once_flag call_once lazy initialization message passing',
     tags: ['concurrency', 'guidelines', 'call_once', 'once_flag', 'message passing', 'thread safe'],
     hash: '#chapter/5/concurrency-guidelines'
+  },
+
+  // ── Chapter 6→4: Lambdas & std::function ──────────────────
+  {
+    id: 'idx-6-1',
+    chapterId: 4,
+    sectionId: 'lambda-basics',
+    chapterTitle: 'Lambda Expressions & std::function',
+    sectionTitle: 'Lambda Syntax & Captures',
+    body: 'lambda anonymous function object closure capture by value by reference [=] [&] [x] [&y] [this] [*this] sort custom comparator filter remove_if immediate invocation IIFE return type deduction auto',
+    tags: ['lambda', 'capture', 'closure', '[=]', '[&]', 'comparator', 'predicate', 'anonymous function'],
+    hash: '#chapter/4/lambda-basics'
+  },
+  {
+    id: 'idx-6-2',
+    chapterId: 4,
+    sectionId: 'lambda-captures-lifetime',
+    chapterTitle: 'Lambda Expressions & std::function',
+    sectionTitle: 'Capture Pitfalls & Lifetime',
+    body: 'lambda capture lifetime dangling reference mutable by-value snapshot this object lifetime UB undefined behaviour return lambda store beyond scope local variable destroyed',
+    tags: ['capture lifetime', 'dangling reference', 'mutable', 'UB', 'this capture', 'snapshot', 'lambda pitfall'],
+    hash: '#chapter/4/lambda-captures-lifetime'
+  },
+  {
+    id: 'idx-6-3',
+    chapterId: 4,
+    sectionId: 'std-function',
+    chapterTitle: 'Lambda Expressions & std::function',
+    sectionTitle: 'std::function & Type Erasure',
+    body: 'std::function type erasure callable wrapper heap allocation indirect call no inlining overhead small buffer free function functor member function pointer callback vector heterogeneous auto prefer',
+    tags: ['std::function', 'type erasure', 'callable', 'heap', 'callback', 'functor', 'overhead', 'auto'],
+    hash: '#chapter/4/std-function'
+  },
+  {
+    id: 'idx-6-4',
+    chapterId: 4,
+    sectionId: 'higher-order-functions',
+    chapterTitle: 'Lambda Expressions & std::function',
+    sectionTitle: 'Higher-Order Functions & STL',
+    body: 'higher-order function STL algorithms sort find_if transform for_each count_if remove_if accumulate lambda factory make_multiplier generic lambda auto parameter C++14 pipeline filter map reduce',
+    tags: ['higher-order', 'STL', 'transform', 'find_if', 'accumulate', 'generic lambda', 'auto parameter', 'factory', 'pipeline'],
+    hash: '#chapter/4/higher-order-functions'
+  },
+  {
+    id: 'idx-6-5',
+    chapterId: 4,
+    sectionId: 'lambda-guidelines',
+    chapterTitle: 'Lambda Expressions & std::function',
+    sectionTitle: 'When to Use What',
+    body: 'lambda vs named function std::function API boundary auto prefer explicit capture avoid [=] large objects std::bind obsolete generic lambda template guidelines best practices callable',
+    tags: ['guidelines', 'lambda vs function', 'std::bind obsolete', 'explicit capture', 'API boundary', 'best practices'],
+    hash: '#chapter/4/lambda-guidelines'
   }
 ];

@@ -1,5 +1,5 @@
 var q4 = {
-  chapterId: 4,
+  chapterId: 6,
   passingScore: 70,
   questions: [
     {

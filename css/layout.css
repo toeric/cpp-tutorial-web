@@ -158,6 +158,13 @@
   text-overflow: ellipsis;
 }
 
+.sidebar-level-badge {
+  font-size: 9px;
+  padding: 1px 4px;
+  flex-shrink: 0;
+  line-height: 1.4;
+}
+
 .chapter-progress-dot {
   width: 8px;
   height: 8px;
